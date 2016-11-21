@@ -15,5 +15,7 @@ nb-configuration.xml
 
 resources/META-INF/
 persistence.xml
-ApplicationConfig.java
+
+rest/ApplicationConfig.java
+
 /nbproject/
