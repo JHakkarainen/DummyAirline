@@ -5,6 +5,14 @@
  */
 package rest;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import entities.Flights;
+import facades.FlightsFacade;
+import facades.IFlights;
+import java.sql.Date;
+import java.util.List;
+import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -23,6 +31,9 @@ import javax.ws.rs.core.MediaType;
 @Path("api")
 public class Resource {
 
+    static IFlights facade = new FlightsFacade(Persistence.createEntityManagerFactory("pu"));
+    static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    
     @Context
     private UriInfo context;
 
@@ -44,22 +55,22 @@ public class Resource {
     public String getAllFlightsTwoParams(@PathParam("origin") String origin, 
             @PathParam("destination") String destination) {
         
-        String parameters = origin + ", " + destination;
+        List<Flights> f = facade.getWithTwo(origin, destination);
         
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
+        return gson.toJson(f);
     }
     @GET
+    @Path("AllParameters/{origin}/{destination}/{date}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAllFlightsAllParams() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
+    public String getAllFlightsAllParams(@PathParam("origin") String origin,
+            @PathParam("destination") String dest, @PathParam("date") Date date) {
+        List<Flights> f = facade.getWithAll(origin, dest, date);
+        return gson.toJson(f);
     }
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllFlights() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
+        return null;
     }
 
     /**
