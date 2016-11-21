@@ -33,23 +33,33 @@ public class FlightsFacade implements IFlights {
     public void addEntityManagerFactory(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
+
     @Override
     public List<Flights> getWithAll(String origin, String dest, Date date) {
         EntityManager em = getEntityManager();
         try {
-        Query query = em.createNamedQuery("Flights.findWithAll", Flights.class);
-        
+            Query query = em.createNamedQuery("Flights.findWithAll", Flights.class)
+                    .setParameter("origin", origin).setParameter("destination", dest)
+                    .setParameter("date", date);
+            List<Flights> f = query.getResultList();
+            return f;
+        } finally {
+            em.close();
         }
-        finally {
-        em.close();
-        }
-        return null;
+
     }
 
     @Override
     public List<Flights> getWithTwo(String origin, String dest) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        EntityManager em = getEntityManager();
+        try {
+            Query query = em.createNamedQuery("Flights.findWithTwo", Flights.class)
+                    .setParameter("origin", origin).setParameter("destination", dest);
+            List<Flights> f = query.getResultList();
+            return f;
+        } finally {
+            em.close();
+        }
     }
 
     @Override
@@ -59,7 +69,7 @@ public class FlightsFacade implements IFlights {
 
     @Override
     public List<Flights> getWithOrigin(String origin, Date date) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }
