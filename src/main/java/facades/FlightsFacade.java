@@ -7,6 +7,11 @@ package facades;
 
 import entities.Flights;
 import java.sql.Date;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
@@ -14,23 +19,46 @@ import java.sql.Date;
  */
 public class FlightsFacade implements IFlights {
 
-    @Override
-    public Flights getWithAll(String origin, String dest, Date date) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
+
+    public FlightsFacade(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+
+    private EntityManager getEntityManager() {
+        return emf.createEntityManager();
     }
 
     @Override
-    public Flights getWithTwo(String origin, String dest) {
+    public void addEntityManagerFactory(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+    
+    @Override
+    public List<Flights> getWithAll(String origin, String dest, Date date) {
+        EntityManager em = getEntityManager();
+        try {
+        Query query = em.createNamedQuery("Flights.findWithAll", Flights.class);
+        
+        }
+        finally {
+        em.close();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Flights> getWithTwo(String origin, String dest) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
-    public Flights getWithDate(Date date) {
+    public List<Flights> getWithDate(Date date) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Flights getWithOrigin(String origin, Date date) {
+    public List<Flights> getWithOrigin(String origin, Date date) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
 

@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -20,6 +22,11 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "flights")
+@NamedQueries({
+@NamedQuery(name="flights.findWithAll", query="SELECT f FROM Flights f WHERE f.date = :date" + 
+        "AND WHERE f.origin = :origin AND WHERE f.destination = :destination"),
+@NamedQuery(name="flights.findWithTwo", query="SELECT f FROM Flights f WHERE f.")
+})
 public class Flights implements Serializable {
 
     private static final long serialVersionUID = 1L;

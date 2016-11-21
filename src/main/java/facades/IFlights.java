@@ -7,14 +7,18 @@ package facades;
 
 import entities.Flights;
 import java.sql.Date;
+import java.util.List;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
  * @author jarmo
  */
 public interface IFlights {
-    public Flights getWithAll(String origin, String dest, Date date);
-    public Flights getWithTwo(String origin, String dest);
-    public Flights getWithDate(Date date);
-    public Flights getWithOrigin(String origin, Date date);
+    
+    void addEntityManagerFactory(EntityManagerFactory emf);
+    public List<Flights> getWithAll(String origin, String dest, Date date);
+    public List<Flights> getWithTwo(String origin, String dest);
+    public List<Flights> getWithDate(Date date);
+    public List<Flights> getWithOrigin(String origin, Date date);
 }
