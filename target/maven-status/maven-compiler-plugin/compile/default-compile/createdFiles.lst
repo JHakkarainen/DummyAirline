@@ -1,2 +1,5 @@
 rest\Resource.class
+entities\Flights.class
+entities\Flights_.class
+MakeTable\MakeTable.class
 rest\ApplicationConfig.class
