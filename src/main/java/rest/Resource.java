@@ -12,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -33,11 +34,30 @@ public class Resource {
 
     /**
      * Retrieves representation of an instance of rest.Resource
+     * @param origin
+     * @param destination
      * @return an instance of java.lang.String
      */
     @GET
-    @Produces(MediaType.APPLICATION_XML)
-    public String getXml() {
+    @Path("TwoParameters/{origin},{destination}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllFlightsTwoParams(@PathParam("origin") String origin, 
+            @PathParam("destination") String destination) {
+        
+        String parameters = origin + ", " + destination;
+        
+        //TODO return proper representation object
+        throw new UnsupportedOperationException();
+    }
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllFlightsAllParams() {
+        //TODO return proper representation object
+        throw new UnsupportedOperationException();
+    }
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllFlights() {
         //TODO return proper representation object
         throw new UnsupportedOperationException();
     }
@@ -47,7 +67,7 @@ public class Resource {
      * @param content representation for the resource
      */
     @PUT
-    @Consumes(MediaType.APPLICATION_XML)
+    @Consumes(MediaType.APPLICATION_JSON)
     public void putXml(String content) {
     }
 }

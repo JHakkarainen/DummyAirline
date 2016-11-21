@@ -13,8 +13,8 @@ import java.sql.Date;
  * @author jarmo
  */
 public interface IFlights {
-    public Flights getAllFlights(String origin, String dest, Date date);
-    public Flights getAllFlights(String origin, String dest);
+    public Flights getWithAll(String origin, String dest, Date date);
+    public Flights getWithTwo(String origin, String dest);
     public Flights getWithDate(Date date);
     public Flights getWithOrigin(String origin, Date date);
 }

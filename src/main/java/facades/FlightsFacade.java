@@ -15,12 +15,12 @@ import java.sql.Date;
 public class FlightsFacade implements IFlights {
 
     @Override
-    public Flights getAllFlights(String origin, String dest, Date date) {
+    public Flights getWithAll(String origin, String dest, Date date) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Flights getAllFlights(String origin, String dest) {
+    public Flights getWithTwo(String origin, String dest) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
 
