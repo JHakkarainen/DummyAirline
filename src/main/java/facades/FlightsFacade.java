@@ -39,8 +39,8 @@ public class FlightsFacade implements IFlights {
         EntityManager em = getEntityManager();
         try {
             Query query = em.createNamedQuery("Flights.findWithAll", Flights.class)
-                    .setParameter("origin", origin).setParameter("destination", dest)
-                    .setParameter("date", date);
+                    .setParameter("f.origin", origin).setParameter("destination", dest)
+                    .setParameter("f.date", date);
             List<Flights> f = query.getResultList();
             return f;
         } finally {
@@ -54,7 +54,7 @@ public class FlightsFacade implements IFlights {
         EntityManager em = getEntityManager();
         try {
             Query query = em.createNamedQuery("Flights.findWithTwo", Flights.class)
-                    .setParameter("origin", origin).setParameter("destination", dest);
+                    .setParameter("f.origin", origin).setParameter("f.destination", dest);
             List<Flights> f = query.getResultList();
             return f;
         } finally {
@@ -64,12 +64,28 @@ public class FlightsFacade implements IFlights {
 
     @Override
     public List<Flights> getWithDate(Date date) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        EntityManager em = getEntityManager();
+        try {
+            Query query = em.createNamedQuery("Flights.findWithDate", Flights.class)
+                    .setParameter("f.date", date);
+            List<Flights> f = query.getResultList();
+            return f;
+        } finally {
+            em.close();
+        }
     }
 
     @Override
     public List<Flights> getWithOrigin(String origin, Date date) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        EntityManager em = getEntityManager();
+        try {
+            Query query = em.createNamedQuery("Flights.findWithOrigin", Flights.class)
+                    .setParameter("f.origin", origin);
+            List<Flights> f = query.getResultList();
+            return f;
+        } finally {
+            em.close();
+        }
     }
 
 }
